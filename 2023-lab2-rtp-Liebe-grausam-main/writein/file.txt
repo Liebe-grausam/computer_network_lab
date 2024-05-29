@@ -1,0 +1,8130 @@
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot><?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+<?xml version="1.0" ?>
+<robot name="robot_dog">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.3 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="neck">
+    <visual>
+      <geometry>
+        <cylinder length="0.13" radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="left_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_ear">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  
+  <link name="left_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+    </collision>
+    
+  </link>
+  
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="right_back_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+  
+  <link name="tail">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </visual>
+  </link>
+  
+  
+  
+  
+  <joint name="body_to_left_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_leg"/>
+    <origin xyz="-0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_front_leg_to_wheel" type="continuous">
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_front_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_leg"/>
+    <origin xyz="-0.15 0.1 -0.1"/>
+  </joint>
+  
+  
+  <joint name="right_front_leg_to_wheel" type="continuous">
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_neck" type="fixed">
+    <parent link="base_link"/>
+    <child link="neck"/>
+    <origin xyz="-0.15 0 0.115"/>
+  </joint>
+  
+
+  
+  <joint name="neck_to_head" type="revolute">
+  	<parent link="neck"/>
+  	<child link="head"/>
+  	<axis xyz="0 1 0"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.065"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+  <joint name="head_to_left_ear" type="fixed">
+    <parent link="head"/>
+    <child link="left_ear"/>
+    <origin xyz="0.02 -0.04 0.05"/>
+  </joint>
+  
+  <joint name="head_to_right_ear" type="fixed">
+    <parent link="head"/>
+    <child link="right_ear"/>
+    <origin xyz="0.02 0.04 0.05"/>
+  </joint>
+  
+
+  
+  <joint name="body_to_left_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_leg"/>
+    <origin xyz="0.15 -0.1 -0.1"/>
+  </joint>
+  
+  <joint name="left_back_leg_to_wheel" type="continuous">
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_right_back_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_leg"/>
+    <origin xyz="0.15 0.1 -0.1"/>
+  </joint>
+  
+  <joint name="right_back_leg_to_wheel" type="continuous">
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="0 0 -0.1"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  
+  <joint name="body_to_tail" type="revolute">
+    <parent link="base_link"/>
+    <child link="tail"/>
+    <axis xyz="1 0 0"/>
+  	<origin rpy="0 0 0" xyz="0.2 0 0"/>
+  	<limit lower="-1.5708" upper="1.5708" effort="100" velocity="0.1"/>
+  </joint>
+  
+
+
+</robot>
+
